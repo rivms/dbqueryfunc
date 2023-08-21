@@ -1,0 +1,14 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AzureWebJobsStorage": "",
+    "AzureWebJobsFeatureFlags": "EnableWorkerIndexing",
+    "snowflake_account": "",
+    "snowflake_user": "",
+    "snowflake_password": "",
+    "snowflake_warehouse": "COMPUTE_WH",
+    "snowflake_database": "SNOWFLAKE_SAMPLE_DATA",
+    "snowflake_schema": "TPCDS_SF100TCL"
+  }
+}

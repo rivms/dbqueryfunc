@@ -1,0 +1,18 @@
+POST http://localhost:7071/api/orchestrators/dbqueryfunc
+Content-Type: application/json
+
+{
+    "startKey": 10,
+    "stopKey": 20
+}
+
+
+###
+
+POST http://localhost:7071/api/orchestrators/dbqueryfunc
+Content-Type: application/json
+
+{
+    "startKey": 1,
+    "stopKey": 100000
+}
