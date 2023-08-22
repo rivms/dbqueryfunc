@@ -14,10 +14,12 @@ async def http_start(req: func.HttpRequest, client: df.DurableOrchestrationClien
     
     start_key = json_data["startKey"]
     end_key = json_data["stopKey"]
+    activity_delay = json_data.get("activityDelay", 0)
 
 
     instance_id = await client.start_new("dbqueryfunc", client_input={"start_key": start_key, 
-                                                                      "stop_key": end_key})
+                                                                      "stop_key": end_key,
+                                                                      "activity_delay": activity_delay})
     response = client.create_check_status_response(req, instance_id)
     return response
 
@@ -34,10 +36,12 @@ def dbqueryfunc(context: df.DurableOrchestrationContext):
 def retrieve_invoke(input):
     # Get data from Snowflake
     import snowflake.connector
+    import time
     #import pandas
     
     start_key = input["start_key"]
     stop_key = input["stop_key"]
+    activity_delay = input["activity_delay"]
 
     USER = os.environ["snowflake_user"]
     PASSWORD = os.environ["snowflake_password"]
@@ -69,6 +73,10 @@ def retrieve_invoke(input):
     json_result =  df.to_json()
 
     # Make Rest API call
+    logging.info(f"Starting Delay of {activity_delay} seconds")
+    if activity_delay>0:
+        time.sleep(activity_delay)
+    logging.info(f"Ending Delay")
 
     return {"rows": len(df), 
             "jsonSize": len(json_result), 

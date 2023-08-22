@@ -14,5 +14,18 @@ Content-Type: application/json
 
 {
     "startKey": 1,
-    "stopKey": 100000
+    "stopKey": 20,
+    "activityDelay": 180
+}
+
+
+###
+
+POST https://dbqueryfuncapp.azurewebsites.net/api/orchestrators/dbqueryfunc
+Content-Type: application/json
+
+{
+    "startKey": 10,
+    "stopKey": 30,
+    "activityDelay": 180
 }
